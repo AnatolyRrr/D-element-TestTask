@@ -70,10 +70,22 @@ module.exports = {
             {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
-                  devMode ? "style-loader" : MiniCssExtractPlugin.loader,
-                  "css-loader",
-                  "postcss-loader",
-                  "sass-loader",
+                    devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    "postcss-loader",
+                    {
+                      loader: "postcss-loader",
+                      options: {
+                          postcssOptions: {
+                              plugins: [
+                                  [
+                                      "autoprefixer"
+                                    ],
+                                ],
+                            },
+                        },
+                    },
+                    "sass-loader"
                 ],
             },
             {
