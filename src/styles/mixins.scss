@@ -62,8 +62,10 @@ $light-blue: #5A98D0;
 }
 
 $sizes: (
-    "mobile":500px,
-    "tablet":991px,
+    "mobile":767px,
+    "tablet":997px,
+    "mid-desktop": 1660px,
+    "mini-desktop": 1200px,
 );
 
 @mixin media($media) {

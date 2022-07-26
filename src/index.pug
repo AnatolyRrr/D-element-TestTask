@@ -3,7 +3,7 @@ extends layout/base
 mixin article(title, text)
     strong.article__title= title
     p.article__text.opacity= text
-    a.learn-more.link(href="")
+    a.learn-more.link(href="#")
         strong Learn more
         include assets/vector.svg
 
@@ -12,13 +12,13 @@ block content
     header.header.container
         include assets/logoDark.svg
         nav.header__nav
-            a.link(href="") 
+            a.link(href="#") 
                 strong About
-            a.link(href="") 
+            a.link(href="#") 
                 strong What We Do
-            a.link(href="") 
+            a.link(href="#") 
                 strong Project
-            a.link(href="") 
+            a.link(href="#") 
                 strong How It Work With Us
         button.hamburger Menu
 
@@ -92,16 +92,16 @@ block content
                             p hello.afrian@gmail.com
                     .about-us
                         strong.about-us__title About US
-                        a.link(href="") About
-                        a.link(href="") What We Do
-                        a.link(href="") Project
-                        a.link(href="") How It Work With Us
+                        a.link(href="#") About
+                        a.link(href="#") What We Do
+                        a.link(href="#") Project
+                        a.link(href="#") How It Work With Us
                     .follow-us 
                         strong.follow-us__title Follow US
-                        a.link(href="") Instagram
-                        a.link(href="") Facebook
-                        a.link(href="") Linkedin
-                        a.link(href="") Youtube
+                        a.link(href="#") Instagram
+                        a.link(href="#") Facebook
+                        a.link(href="#") Linkedin
+                        a.link(href="#") Youtube
                 .date.container.opacity #{(new Date()).getFullYear()} © Afrianska. All rights reserved.
     .modal-form
         form.form
