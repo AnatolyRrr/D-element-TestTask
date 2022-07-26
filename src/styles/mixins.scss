@@ -1,0 +1,79 @@
+$basic-color: #1F3F68;
+
+$light-blue: #5A98D0;
+
+%bold-size {
+    font-size: 20px;
+    line-height: 30px;
+};
+
+%modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .75);
+    z-index: 10;
+}
+
+@mixin close-btn() {
+    &__close {
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        font-size: 0;
+        border: 0;
+        background-color: #ffffff;
+        cursor: pointer;
+    }
+    
+    &__close::before {
+        content: "";
+        display: block;
+        position: relative;
+        top: 2px;
+        right: 3px;
+        width: 30px;
+        height: 4px;
+        background-color: $basic-color;
+        transform: rotate(45deg);
+        transition: all ease-in 0.1s;
+    }
+    
+    &__close::after {
+        content: "";
+        display: block;
+        position: relative;
+        bottom: 2px;
+        right: 3px;
+        width: 30px;
+        height: 4px;
+        background-color: $basic-color;
+        transform: rotate(-45deg);
+        transition: all ease-in 0.1s;
+    }
+
+    &__close:hover::before,
+    &__close:hover::after {
+        background-color: $light-blue;
+    }
+}
+
+$sizes: (
+    "mobile":500px,
+    "tablet":991px,
+);
+
+@mixin media($media) {
+
+    @each $size,
+    $resolution in $sizes {
+        @if $media ==$size {
+            @media only screen and (max-width: $resolution) {
+                @content;
+            }
+        }
+    }
+}
