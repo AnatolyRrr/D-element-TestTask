@@ -89,17 +89,21 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(png|jpg|svg|gif)$/,
+                test: /\.(png|jpg|gif)$/,
                 type: 'asset/resource'
             },
             {
-                test: /\.(ttf|woff|woff2|eot|svg)$/,
+                test: /\.(ttf|woff|woff2|eot)$/,
                 type: 'asset/inline'
             },
             {
                 test: /\.pug$/,
                 loader: '@webdiscus/pug-loader',
             },
+            {
+                test: /\.svg$/,
+                loader: 'svg-inline-loader'
+            }
         ]
     }
 }
