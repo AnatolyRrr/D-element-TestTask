@@ -12,25 +12,26 @@ block content
     header.header.container
         include assets/logoDark.svg
         nav.header__nav
-            a.link(href="#") 
-                strong About
-            a.link(href="#") 
+            a.header__link(href="#primary") 
+                strong About US
+            a.header__link(href="#main") 
                 strong What We Do
-            a.link(href="#") 
-                strong Project
-            a.link(href="#") 
-                strong How It Work With Us
+            a.header__link(href="#clients") 
+                strong Our Clients
+            a.header__link(href="#contacts") 
+                strong Contacts
         button.hamburger Menu
 
-    section.primary
+    section.primary#primary
         .primary__wrapper.container
             .primary__info
                 h1.primary__info-title New Automation<br>Tool for Your Home
                 p.primary__info-text.opacity Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus tristique vulputate ultrices ut mauris tellus at. Posuere sollicitudin odio tellus elit.
-                button.primary__info-btn.btn.light See Our Project
+                .info-btn__wrap
+                    button.primary__info-btn.btn.light See Our Project
             include assets/aboutImg.svg
             
-    main.main.container
+    main.main.container#main
         .left-side 
             h2.main__title.title What we do to help our client grow in digital era:
             article.article-1.article
@@ -48,7 +49,7 @@ block content
                 +article('Build Your Digital Product That Suitable For Your Need', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
 
     .bottom-background_1.light
-        section.clients.container
+        section.clients.container#clients
             .clients__header
                 h2.clients__title.title Our Beloved Client
                 p.clients__text.opacity Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
@@ -76,7 +77,7 @@ block content
                         p.talk__text.opacity Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
                     button.talk__btn.btn Let's Talk
                 .footer__line.container
-                .contacts.container
+                .contacts.container#contacts
                     .connection
                         .connection__title
                             include assets/logoLight.svg
@@ -120,7 +121,3 @@ block content
         .msg 
             h2.msg__title Your message successfully sent
             button.msg__close Close
-
-
-            
-        

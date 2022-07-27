@@ -12,6 +12,10 @@ body {
     font-size: 16px;
     line-height: 26px;
     letter-spacing: 0.05em;
+
+    @include media(mobile) {
+        letter-spacing: 0.04em;
+    }
 }
 
 * {
@@ -52,6 +56,11 @@ svg {
 .title {
     font-size: 36px;
     line-height: 46px;
+
+    @include media(mobile) {
+        font-size: 30px;
+        line-height: 40px;
+    }
 }
 
 .light {
@@ -75,28 +84,91 @@ svg {
     max-width: 1366px;
     margin: 0 auto;
     z-index: 6;
+    background-color: #ffffff;
 
     &__nav {
         display: flex;
         width: 800px;
         justify-content: space-between;
         
-        .link {
+        .header__link {
             padding: 30px 20px;
             text-decoration: none;
             color: $basic-color;
-            transition: color ease-in .3s, text-shadow ease-in .3s;
+            transition: color ease-in .3s;
             @extend %bold-size
         }
 
-        .link:hover {
+        .header__link:hover {
             color: $light-blue;
-            text-shadow: 1px 1px 2px white, 0 0 1em white, 0 0 0.2em white;
+        }
+    }
+
+    @include media(mobile) {
+        .header__nav {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 7;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            transform: translateY(-100%);
+            transition: transform ease-in .4s;
+        }
+    
+        .header__nav--active {
+            transform: translateY(0);
         }
     }
 
     .hamburger {
         display: none;
+    }
+
+    @include media(mobile) {
+        .hamburger {
+        display: block;
+        z-index: 8;
+        font-size: 0;
+        line-height: 0;
+        width: 19px;
+        height: 22px;
+        border: 0;
+        cursor: pointer;
+        background-color: transparent;
+        }
+
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 40px;
+            right: 20px;
+            width: 19px;
+            height: 2px;
+            background-color: #000000;
+            box-shadow: 0 7px 0 0 #000000,
+                        0 15px 0 0 #000000;
+            transition: all ease-in .4s;
+        }
+
+        .hamburger--active::before {
+            top: 50px;
+            transform: rotate(45deg);
+            box-shadow: none;
+        }
+
+        .hamburger--active::after {
+            top: 50px;
+            transform: rotate(-45deg);
+            box-shadow: none;
+        }
     }
 }
 
@@ -107,8 +179,12 @@ svg {
     background: linear-gradient(0deg, rgba(152, 195, 232, 0.2) 8.84%, rgba(152, 195, 232, 0) 31.12%);
     max-width: 100%;
 
-    @include media(tablet) {
+    @include media(mini-desktop) {
         height: auto;
+        padding-bottom: 200px;
+    }
+
+    @include media(tablet) {
         padding-bottom: 100px;
     }
 
@@ -130,19 +206,34 @@ svg {
             font-size: 64px;
             line-height: 74px;
             letter-spacing: 0.02em;
-            width: 510px;
+            max-width: 510px;
+
+            @include media(mobile) {
+                font-size: 45px;
+                line-height: 55px;
+            }
         }
         &-text {
             margin-top: 40px;
             max-width: 405px;
         }
+        
         &-btn {
             margin-top: 60px;
             box-shadow: 5px 10px 20px rgba(53, 110, 173, 0.2);
             transition: background-color ease-in-out .3s;
         }
+
         &-btn:hover {
             background-color: $basic-color;
+        }
+
+        @include media(mobile) {
+            .info-btn__wrap {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+            }
         }
     }
     &__img {
@@ -187,6 +278,10 @@ svg {
         @include media(tablet) {
             padding-bottom: 0;
         }
+
+        @include media(mobile) {
+            text-align: center;
+        }
     }
 
     .left-side {
@@ -198,6 +293,11 @@ svg {
             margin-left: 80px;
             max-width: 460px;
         }
+
+        @include media(mobile) {
+            margin-left: 0;
+            max-width: 320px;
+        }
     }
 }
 
@@ -208,6 +308,11 @@ svg {
     box-shadow: 5px 20px 50px rgba(16, 112, 177, 0.2);
     border-radius: 10px;
 
+    @include media(mobile) {
+        width: 100%;
+        padding: 28px;
+    }
+
     .img-wrapper {
         padding-top: 56px;
         display: flex;
@@ -215,6 +320,11 @@ svg {
         position: relative;
         bottom: 56px;
         right: 19px;
+
+        @include media(mobile) {
+            bottom: 40px;
+            padding-top: 40px;
+        }
     }
 
     .img-wrapper_2 {
@@ -222,6 +332,10 @@ svg {
         justify-content: center;
         position: relative;
         bottom: 51px;
+
+        @include media(mobile) {
+            bottom: 40px;   
+        }
     }
 
     &__title {
@@ -284,11 +398,21 @@ svg {
 
     &__header {
         display: flex;
+
+        @include media(mobile) {
+            display: block;
+            text-align: center;
+        }
     }
 
     &__title {
         width: 223px;
         margin: 0 97px 0 0;
+
+        @include media(mobile) {
+            margin: 0 auto 20px;
+            width: 300px;
+        }
     }
 
     &__text {
@@ -304,6 +428,10 @@ svg {
 
         @include media(tablet) {
             padding-top: 50px;
+        }
+
+        @include media(mobile) {
+            padding-top: 25px;
         }
 
         .client {
@@ -453,6 +581,12 @@ svg {
         justify-content: space-between;
         padding: 91px 20px 96px;
 
+        @include media(mobile) {
+            display: block;
+            text-align: center;
+            padding-bottom: 70px;
+        }
+
         &__title {
             margin: 0 0 32px;
             max-width: 317px;
@@ -463,6 +597,9 @@ svg {
         }
         &__btn {
             transition: color ease-in .3s;
+            @include media(mobile) {
+                margin-top: 32px;
+            }
         }
         &__btn:hover {
             color: $basic-color;
@@ -474,6 +611,11 @@ svg {
         align-items: flex-start;
         padding-top: 96px;
         padding-bottom: 40px;
+
+        @include media(mobile) {
+            display: block;
+            padding-top: 70px;
+        }
         
         .connection {
             padding-right: 100px;
@@ -482,10 +624,18 @@ svg {
                 padding-right: 50px;
             }
 
+            @include media(mobile) {
+                padding-bottom: 30px;
+            }
+
             &__title {
                 display: flex;
                 align-items: center;
                 padding-bottom: 33px;
+
+                @include media(mobile) {
+                    padding-bottom: 15px;
+                }
             }
 
             &__name {
@@ -520,9 +670,22 @@ svg {
                 padding-right: 30px;
             }
 
+            @include media(mobile) {
+                padding-bottom: 30px;
+            }
+
             &__title {
                 @extend %bold-size;
                 padding-bottom: 24px;
+
+                @include media(tablet) {
+                    font-size: 18px;
+                    line-height: 28px;
+                }
+
+                @include media(mobile) {
+                    padding-bottom: 15px;
+                }
             }
             
         }
@@ -534,6 +697,15 @@ svg {
             &__title {
                 @extend %bold-size;
                 padding-bottom: 24px;
+
+                @include media(tablet) {
+                    font-size: 18px;
+                    line-height: 28px;
+                }
+
+                @include media(mobile) {
+                    padding-bottom: 15px;
+                }
             }
         }
 
@@ -563,6 +735,13 @@ svg {
         background-color: #ffffff;
         border-radius: 10px;
 
+        @include media(mobile) {
+            width: 100%;
+            height: 100%;
+            padding: 40px 20px;
+            border-radius: 0;
+        }
+
         &__header-wrap {
             display: flex;
             justify-content: space-between;
@@ -586,6 +765,12 @@ svg {
             color: $basic-color
         }
 
+        @include media(mobile) {
+            .label {
+                padding-top: 15px;
+            }
+        }
+
         &__input {
             border: 1px solid #356EAD;
             border-radius: 10px;
@@ -606,6 +791,16 @@ svg {
             box-shadow: 5px 20px 50px rgba(16, 112, 177, 0.2);
             border-radius: 10px;
             border: 0;
+            transition: background-color ease-in .3s;
+
+            @include media(mobile) {
+                width: 100%;
+                margin: 40px auto 0;
+            }
+        }
+
+        &__button:hover {
+            background-color: $basic-color;
         }
 
         &__error {

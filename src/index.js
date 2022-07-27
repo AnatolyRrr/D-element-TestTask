@@ -9,6 +9,36 @@ for(const link of links) {
     });
 };
 
+// Open and close Hamburger menu
+
+const hamburger = document.querySelector('.hamburger');
+const mainMenu = document.querySelector('.header__nav');
+
+const showMenu = () => {
+    mainMenu.classList.toggle('header__nav--active');
+    hamburger.classList.toggle('hamburger--active');
+}
+
+hamburger.onclick = showMenu;
+
+// Scroll to elem for Hamburger menu
+
+const headerLinks = document.querySelectorAll('.header__link');
+
+for (const headerLink of headerLinks) {
+    headerLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      let scrollToElem = headerLink.getAttribute('href');
+      let coordinates = document.querySelector(scrollToElem).offsetTop;
+      window.scrollTo({
+          top: coordinates - 100,
+          behavior: 'smooth'
+      });
+      mainMenu.classList.remove('header__nav--active');
+      hamburger.classList.remove('header__hamburger--active');
+    })
+  };
+
 // Open more client
 const moreClientButton = document.querySelector('.more-client__btn');
 const moreClients = document.querySelectorAll('.more-client__item');
