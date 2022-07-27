@@ -1,0 +1,19 @@
+section.clients.container#clients
+    .clients__header
+        h2.clients__title.title Our Beloved Client
+        p.clients__text.opacity Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+
+    .clients__wrapper  
+
+        - let clients = ['LOGO CLIENT 1.png', 'LOGO CLIENT 2.png', 'LOGO CLIENT 3.png', 'LOGO CLIENT 4.png', 'LOGO CLIENT 5.png', 'LOGO CLIENT 6.png', 'LOGO CLIENT 7.png'];
+        - let moreClients = ['LOGO CLIENT 8.png', 'LOGO CLIENT 9.png', 'LOGO CLIENT 10.png'];
+
+        each client in clients 
+            .client
+                img(src=require('../../assets/BasicClients/' + client))
+        
+        .more-client__btn More Client
+
+        each client in moreClients 
+            .client.more-client__item
+                img(src=require('../../assets/MoreClients/' + client))

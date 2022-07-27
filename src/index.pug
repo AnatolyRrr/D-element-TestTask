@@ -9,19 +9,6 @@ mixin article(title, text)
 
 
 block content 
-    header.header.container
-        include assets/logoDark.svg
-        nav.header__nav
-            a.header__link(href="#primary") 
-                strong About US
-            a.header__link(href="#main") 
-                strong What We Do
-            a.header__link(href="#clients") 
-                strong Our Clients
-            a.header__link(href="#contacts") 
-                strong Contacts
-        button.hamburger Menu
-
     section.primary#primary
         .primary__wrapper.container
             .primary__info
@@ -47,77 +34,3 @@ block content
                 .img-wrapper
                     include assets/article3.svg
                 +article('Build Your Digital Product That Suitable For Your Need', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.')
-
-    .bottom-background_1.light
-        section.clients.container#clients
-            .clients__header
-                h2.clients__title.title Our Beloved Client
-                p.clients__text.opacity Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-
-            .clients__wrapper  
-
-                - let clients = ['LOGO CLIENT 1.png', 'LOGO CLIENT 2.png', 'LOGO CLIENT 3.png', 'LOGO CLIENT 4.png', 'LOGO CLIENT 5.png', 'LOGO CLIENT 6.png', 'LOGO CLIENT 7.png'];
-                - let moreClients = ['LOGO CLIENT 8.png', 'LOGO CLIENT 9.png', 'LOGO CLIENT 10.png'];
-
-                each client in clients 
-                    .client
-                        img(src=require('./assets/BasicClients/' + client))
-                
-                .more-client__btn More Client
-
-                each client in moreClients 
-                    .client.more-client__item
-                        img(src=require('./assets/MoreClients/' + client))
-
-        .bottom-background_2
-            footer.footer
-                .talk.container
-                    .talk__wrapper
-                        h2.talk__title.title Intersted to woek with our team?
-                        p.talk__text.opacity Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-                    button.talk__btn.btn Let's Talk
-                .footer__line.container
-                .contacts.container#contacts
-                    .connection
-                        .connection__title
-                            include assets/logoLight.svg
-                            h3.connection__name Afrianska
-                        .connection__adress
-                            strong A.
-                            p Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        .connection__tel 
-                            strong T.
-                            p +62-812-7313-4321
-                        .connection__email
-                            strong E.
-                            p hello.afrian@gmail.com
-                    .about-us
-                        strong.about-us__title About US
-                        a.link(href="#") About
-                        a.link(href="#") What We Do
-                        a.link(href="#") Project
-                        a.link(href="#") How It Work With Us
-                    .follow-us 
-                        strong.follow-us__title Follow US
-                        a.link(href="#") Instagram
-                        a.link(href="#") Facebook
-                        a.link(href="#") Linkedin
-                        a.link(href="#") Youtube
-                .date.container.opacity #{(new Date()).getFullYear()} © Afrianska. All rights reserved.
-    .modal-form
-        form.form
-            .form__header-wrap
-                h2.form__title SEND US MESSAGE
-                button.form__close Close
-            label.label(for="name") Full Name
-            input.form__name.form__input(name="name" type="text" id="name" placeholder="Your Name" autofocus)
-            label.label(for="email") Email
-            input.form__email.form__input(name="email" type="text" id="email" placeholder="Your Email")
-            label.label(for="message") Message
-            textarea.form__message.form__input(name="message", cols="30", rows="4" id="message" placeholder="Your Message")
-            .form__error Fields filled out incorrectly
-            button.form__button(type="submit") SUBMIT
-    .modal-msg
-        .msg 
-            h2.msg__title Your message successfully sent
-            button.msg__close Close

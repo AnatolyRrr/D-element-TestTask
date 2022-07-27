@@ -1,0 +1,157 @@
+@import './mixins.scss';
+
+.bottom-background_1 {
+    background: $light-blue;
+    border-radius: 200px 0px 0px 0px;
+    width: 100%;
+    margin-top: 212px;
+
+    @include media(tablet) {
+        border-radius: 100px 0px 0px 0px;
+        margin-top: 100px;
+    }
+}
+
+.clients {
+    &__header {
+        display: flex;
+        padding-top: 96px;
+
+        @include media(mobile) {
+            display: block;
+            text-align: center;
+            padding-top: 70px;
+        }
+    }
+
+    &__title {
+        width: 223px;
+        margin: 0 97px 0 0;
+
+        @include media(mobile) {
+            margin: 0 auto 20px;
+            width: 300px;
+        }
+    }
+
+    &__text {
+        max-width: 540px;
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 111px;
+        justify-content: center;
+        border: 0;
+        padding-bottom: 125px;
+
+        @include media(tablet) {
+            padding-top: 50px;
+        }
+
+        @include media(mobile) {
+            padding-top: 25px;
+            padding-bottom: 70px;
+        }
+
+        .client {
+            width: 235px;
+            height: 128px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ffffff;
+            border-top: 0;
+            @include media(tablet) {
+                border: 0;
+            }
+
+            &:first-child {
+                border-left: 0;
+                @include media(tablet) {
+                    border: 0;
+                }
+            }
+            &:nth-child(4) {
+                border-right: 0;
+                @include media(tablet) {
+                    border: 0;
+                }
+            }
+            &:nth-child(5) {
+                border-left: 0;
+                border-bottom: 0;
+                @include media(tablet) {
+                    border: 0;
+                }
+            }
+            &:nth-child(6) {
+                border-bottom: 0;
+                @include media(tablet) {
+                    border: 0;
+                }
+            }
+            &:nth-child(7) {
+                border-bottom: 0;
+                @include media(tablet) {
+                    border: 0;
+                }
+            }
+            &:nth-child(9) {
+                border-right: 0;
+                border-bottom: 0;
+                @include media(tablet) {
+                    border: 0;
+                }
+            }
+            &:nth-child(10) {
+                border-top: 1px solid #ffffff;
+                border-left: 0;
+                border-bottom: 0;
+                @include media(tablet) {
+                    border: 0;
+                }
+            }
+            &:last-child {
+                border-top: 1px solid #ffffff;
+                border-bottom: 0;
+                border-right: 0;
+                @include media(tablet) {
+                    border: 0;
+                }
+            }
+        }
+
+        .more-client__btn {
+            background-color: rgba(31, 63, 104, 0.2);
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 46px;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            width: 235px;
+            height: 128px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color ease-in .3s;
+        }
+
+        .more-client__btn:hover {
+            background-color: #316099;
+        }
+
+        .more-client__btn--disabled {
+            display: none;
+        }
+
+        .more-client__item {
+            display: none;
+        }
+
+        .more-client__item--activate {
+            display: flex;
+        }
+    }
+}
