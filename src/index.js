@@ -63,9 +63,14 @@ const error = document.querySelector('.form__error');
 
 const showModal = () => {
     modalForm.classList.toggle('modal--active')
+
     formInputs.forEach(element => {
         element.value = '';
     });
+
+    const nameInput = document.querySelector('.form__name');
+    nameInput.focus();
+    
     error.classList.remove('form__error--active');
     document.body.style.overflow = 'hidden';
 };
