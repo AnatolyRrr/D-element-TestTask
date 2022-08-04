@@ -9,7 +9,9 @@ $light-blue: #5A98D0;
 
 %modal {
     position: fixed;
-    top: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    bottom: 0;
     left: 0;
     display: none;
     width: 100%;
