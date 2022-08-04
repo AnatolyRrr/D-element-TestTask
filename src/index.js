@@ -3,51 +3,73 @@ import './styles/style.scss';
 // Reset default links
 const links = document.querySelectorAll('.link');
 
-for(const link of links) {
+links.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
     });
-};
+});
 
 // Open and close Hamburger menu
 
 const hamburger = document.querySelector('.hamburger');
 const mainMenu = document.querySelector('.header__nav');
 
-const showMenu = () => {
-    mainMenu.classList.toggle('header__nav--active');
-    hamburger.classList.toggle('hamburger--active');
-}
+let isOpenMenu = false;
 
-hamburger.onclick = showMenu;
+function showAndHideMenu() {
+    if(mainMenu && hamburger) {
+        if(!isOpenMenu) {
+            mainMenu.classList.add('header__nav--active');
+            hamburger.classList.add('hamburger--active');
+            isOpenMenu = true;
+        } else {
+            mainMenu.classList.remove('header__nav--active');
+            hamburger.classList.remove('header__hamburger--active');
+            isOpenMenu = false;
+}
+    }
+};
+
+hamburger.onclick = showAndHideMenu;
 
 // Scroll to elem for Hamburger menu
 
 const headerLinks = document.querySelectorAll('.header__link');
 
-for (const headerLink of headerLinks) {
-    headerLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      let scrollToElem = headerLink.getAttribute('href');
+function smoothScrollToLink(link, px) {
+    if(link) {
+        let scrollToElem = link.getAttribute('href');
       let coordinates = document.querySelector(scrollToElem).offsetTop;
       window.scrollTo({
-          top: coordinates - 100,
+            top: coordinates - px,
           behavior: 'smooth'
       });
-      mainMenu.classList.remove('header__nav--active');
-      hamburger.classList.remove('header__hamburger--active');
-    })
+    }
   };
+
+headerLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        smoothScrollToLink(link, 100);
+        showAndHideMenu();
+    })
+});
 
 // Open more client
 const moreClientButton = document.querySelector('.more-client__btn');
 const moreClients = document.querySelectorAll('.more-client__item');
 
-const showMoreClient = () => {
-    moreClientButton.classList.toggle('more-client__btn--disabled');
-    for(let moreClient of moreClients) {
-        moreClient.classList.toggle('more-client__item--activate');
-    };
+let isOpenMoreClient = false;
+
+function showMoreClient() {
+    if(
+        !isOpenMoreClient &&
+        moreClients
+    ) {
+        moreClientButton.classList.add('more-client__btn--disabled');
+        moreClients.forEach(client => {
+            client.classList.add('more-client__item--activate');
+        });
+    }
 };
 
 moreClientButton.onclick = showMoreClient;
