@@ -24,7 +24,7 @@ function showAndHideMenu() {
             isOpenMenu = true;
         } else {
             mainMenu.classList.remove('header__nav--active');
-            hamburger.classList.remove('header__hamburger--active');
+            hamburger.classList.remove('hamburger--active');
             isOpenMenu = false;
         }
     }
