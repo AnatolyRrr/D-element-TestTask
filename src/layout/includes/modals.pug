@@ -5,11 +5,13 @@
             button.form__close Close
         label.label(for="name") Full Name
         input.form__name.form__input(name="name" type="text" id="name" placeholder="Your Name")
+        p.form__error At least two letters and no more than three words
         label.label(for="email") Email
         input.form__email.form__input(name="email" type="text" id="email" placeholder="Your Email")
+        p.form__error Email filled out incorrectly. Example: <b>username@hostname.com</b>
         label.label(for="message") Message
         textarea.form__message.form__input(name="message", cols="30", rows="4" id="message" placeholder="Your Message")
-        .form__error Fields filled out incorrectly
+        p.form__error Write more text
         button.form__button(type="submit") SUBMIT
 .modal-msg
     .msg 
