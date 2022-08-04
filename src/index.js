@@ -26,7 +26,7 @@ function showAndHideMenu() {
             mainMenu.classList.remove('header__nav--active');
             hamburger.classList.remove('header__hamburger--active');
             isOpenMenu = false;
-}
+        }
     }
 };
 
@@ -39,13 +39,13 @@ const headerLinks = document.querySelectorAll('.header__link');
 function smoothScrollToLink(link, px) {
     if(link) {
         let scrollToElem = link.getAttribute('href');
-      let coordinates = document.querySelector(scrollToElem).offsetTop;
-      window.scrollTo({
+        let coordinates = document.querySelector(scrollToElem).offsetTop;
+        window.scrollTo({
             top: coordinates - px,
-          behavior: 'smooth'
-      });
+            behavior: 'smooth'
+        });
     }
-  };
+};
 
 headerLinks.forEach(link => {
     link.addEventListener('click', () => {
@@ -116,10 +116,10 @@ modalMessage.$popup.addEventListener('click', (e) => {
     ) {
         modalMessage.hide()
     }
-    });
+});
 
 const modalForm = new ModalWithForm('.modal-form', '.form__input');
-    
+
 const modalFormOpen = document.querySelector('.talk__btn');
 
 modalFormOpen.addEventListener('click', () => {
@@ -145,7 +145,7 @@ const patterns = {
     name: /^([\s]+)?[a-zа-яА-Я]([-a-zа-яА-Я]+)((\s+[-a-zа-яА-Я]+[a-zа-яА-Я]?){1,2})?([\s]+)?$/i,
     email: /[^.]([-\w\.#$%&'*+\/=?^`{|}~]+)@([a-z\d-]{1,61})\.([a-z]{2,8})(\.[a-z]{2})?/i,
     message: /[a-zа-яА-Я]{2,}/i,
-    }
+}
 
 function validate(field, regex) {
     if(regex.test(field.value)) {
@@ -163,31 +163,31 @@ modalForm.$inputs.forEach(input => {
         validate(e.target, patterns[e.target.attributes.name.value])
     })
 })
-
-
+    
+    
 // Submit form
+    
+const urlForModal = 'https://jsonplaceholder.typicode.com/todos/1';
+
 const submitButton = document.querySelector('.form__button');
-const form = document.querySelector('.form');
+const formFromModal = document.querySelector('.form');
+const nameField = document.querySelector('.form__name');
+const emailField = document.querySelector('.form__email');
+const messageField = document.querySelector('.form__message');
 
-const submitForm = async (e) => {
-    e.preventDefault()
-    const name = document.querySelector('.form__name');
-    const meassage = document.querySelector('.form__message');
-    const email = document.querySelector('.form__email');
 
-    if(name.value.length && meassage.value.length && email.value.split('').includes('@')) {
-        await fetch('https://jsonplaceholder.typicode.com/todos/1', {
-            method: 'POST',
-            body: new FormData(form)
-        })
-        error.classList.remove('form__error--active');
-        modalForm.classList.remove('modal--active');
-        modalMessage.classList.add('modal--active');
-        document.body.style.overflow = 'hidden';
+const submit = async (url, form) => {
+    await fetch(url, {
+        method: 'POST',
+        body: new FormData(form)
+    })
+}
 
-    }else{
-        error.classList.add('form__error--active')
+submitButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    if(
+        (nameField, emailField, messageField).classList.contains('valid')
+    ) {
+        submit(urlForModal, formFromModal);
     }
-};
-
-submitButton.onclick = submitForm;
+})
