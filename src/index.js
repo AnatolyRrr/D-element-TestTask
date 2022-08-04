@@ -76,37 +76,69 @@ moreClientButton.onclick = showMoreClient;
 
 
 // Open and close Modals
-const modalButton = document.querySelector('.talk__btn');
-const modalForm = document.querySelector('.modal-form');
-const modalMessage = document.querySelector('.modal-msg')
-const formInputs = document.querySelectorAll('.form__input');
-const error = document.querySelector('.form__error');
+class Modal {
+    constructor(classModal) {
+        this.$popup = document.querySelector(classModal)
+    }
 
+    show() {
+        this.$popup.style.display = 'flex'
+        this.$popup.style.justifyContent = 'center'
+        document.body.style.overflow = 'hidden'
+    }
 
-const showModal = () => {
-    modalForm.classList.toggle('modal--active')
-
-    formInputs.forEach(element => {
-        element.value = '';
-    });
-
-    const nameInput = document.querySelector('.form__name');
-    nameInput.focus();
-    
-    error.classList.remove('form__error--active');
-    document.body.style.overflow = 'hidden';
+    hide() {
+        this.$popup.style.display = 'none'
+        document.body.style.overflow = ''
+    }
 };
 
-const closeModalForm = (e) => {
+class ModalWithForm extends Modal {
+    constructor(classModal, classInputs) {
+        super(classModal)
+        this.$inputs = document.querySelectorAll(classInputs)
+    }
+
+    clearInputs() {
+        this.$inputs.forEach(input => {
+            input.value = '';
+            input.classList.remove('valid', 'invalid')
+        })
+    }
+};
+
+const modalMessage = new Modal('.modal-msg');
+
+modalMessage.$popup.addEventListener('click', (e) => {
+    if(
+        e.target.matches('.msg__close') ||
+        !e.target.closest('.msg')
+    ) {
+        modalMessage.hide()
+    }
+    });
+
+const modalForm = new ModalWithForm('.modal-form', '.form__input');
+    
+const modalFormOpen = document.querySelector('.talk__btn');
+
+modalFormOpen.addEventListener('click', () => {
+    if(modalForm) {
+        modalForm.show();
+        modalForm.clearInputs();
+    }
+});
+
+modalForm.$popup.addEventListener('click', (e) => {
     if(
         e.target.matches('.form__close') ||
         !e.target.closest('.form')
     ) {
         e.preventDefault();
-        modalForm.classList.remove('modal--active');
-        document.body.style.overflow = '';
+        modalForm.hide();
     }
-};
+})
+
 
 const closeModalMessage = (e) => {
     if(
