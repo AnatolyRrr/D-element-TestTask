@@ -2,6 +2,7 @@
     @extend %modal;
 
     .form {
+        margin: auto;
         width: 540px;
         padding: 56px;
         display: flex;
@@ -18,6 +19,7 @@
             height: 100%;
             padding: 40px 20px;
             border-radius: 0;
+            min-height: 641px;
         }
 
         &__header-wrap {
@@ -36,7 +38,7 @@
         }
 
         .label {
-            padding-top: 32px;
+            padding-top: 18px;
             padding-bottom: 8px;
             opacity: 0.8;
             line-height: 30px;
@@ -56,13 +58,14 @@
             opacity: 0.6;
             letter-spacing: 0.04em;
             resize: none;
+            min-height: 65px;
         }
 
         &__button {
             padding: 0;
-            margin-top: 72px;
+            margin-top: 58px;
             width: 428px;
-            height: 72px;
+            min-height: 72px;
             background-color: $light-blue;
             color: #ffffff;
             letter-spacing: 0.04em;
@@ -73,7 +76,7 @@
 
             @include media(mobile) {
                 width: 100%;
-                margin: 40px auto 0;
+                margin: 40px auto 20px;
             }
         }
 
@@ -82,16 +85,28 @@
         }
 
         &__error {
-            display: none;
+            opacity: 0;
+            font-size: 12px;
+            line-height: 22px;
+            color: darkred
         }
 
-        &__error--active {
-            display: block;
-            text-align: center;
-            color: red;
+        .valid {
+            box-shadow: 0px 0px 0px 2px green;
+            outline: none;
+        }
+        
+        .invalid {
+            box-shadow: 0px 0px 0px 2px orange;
+            outline: none;
+        }
+
+        .invalid+p {
+            opacity: 1;
         }
     }
 }
+
 
 .modal-msg {
     @extend %modal;
@@ -117,12 +132,6 @@
 
         @include close-btn();
     }
-}
-
-.modal--active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 @keyframes fadeInDown {
