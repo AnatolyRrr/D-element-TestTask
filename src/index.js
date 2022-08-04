@@ -139,21 +139,30 @@ modalForm.$popup.addEventListener('click', (e) => {
     }
 })
 
+// Validation
 
-const closeModalMessage = (e) => {
-    if(
-        e.target.matches('.msg__close') ||
-        !e.target.closest('.msg')
-    ) {
-        e.preventDefault();
-        modalMessage.classList.remove('modal--active');
-        document.body.style.overflow = '';
+const patterns = {
+    name: /^([\s]+)?[a-zа-яА-Я]([-a-zа-яА-Я]+)((\s+[-a-zа-яА-Я]+[a-zа-яА-Я]?){1,2})?([\s]+)?$/i,
+    email: /[^.]([-\w\.#$%&'*+\/=?^`{|}~]+)@([a-z\d-]{1,61})\.([a-z]{2,8})(\.[a-z]{2})?/i,
+    message: /[a-zа-яА-Я]{2,}/i,
     }
-};
 
-modalButton.onclick = showModal;
-modalForm.onclick = closeModalForm;
-modalMessage.onclick = closeModalMessage;
+function validate(field, regex) {
+    if(regex.test(field.value)) {
+        field.classList.remove('invalid');
+        field.classList.add('valid');
+
+    } else {
+        field.classList.remove('valid');
+        field.classList.add('invalid');
+    }
+}
+
+modalForm.$inputs.forEach(input => {
+    input.addEventListener('blur', (e) => {
+        validate(e.target, patterns[e.target.attributes.name.value])
+    })
+})
 
 
 // Submit form
