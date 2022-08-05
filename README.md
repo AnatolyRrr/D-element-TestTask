@@ -2,7 +2,7 @@
 
 This is a test task for "D-Element".
 
-https://anatolyrrr.github.io/D-element-Page/
+https://anatolyrrr.github.io/D-element-TestTask/
 
 ## What tools were used
 
