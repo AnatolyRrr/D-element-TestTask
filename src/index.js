@@ -1,4 +1,8 @@
 import './styles/style.scss';
+import {Modal, ModalWithForm} from './modules/modals';
+import {patterns, validate} from './modules/validate';
+import {submit} from './modules/api';
+import {smoothScrollToLink} from './modules/smoothScroll';
 
 // Reset default links
 const links = document.querySelectorAll('.link');
@@ -36,17 +40,6 @@ hamburger.onclick = showAndHideMenu;
 
 const headerLinks = document.querySelectorAll('.header__link');
 
-function smoothScrollToLink(link, px) {
-    if(link) {
-        let scrollToElem = link.getAttribute('href');
-        let coordinates = document.querySelector(scrollToElem).offsetTop;
-        window.scrollTo({
-            top: coordinates - px,
-            behavior: 'smooth'
-        });
-    }
-};
-
 headerLinks.forEach(link => {
     link.addEventListener('click', () => {
         smoothScrollToLink(link, 100);
@@ -76,36 +69,6 @@ moreClientButton.onclick = showMoreClient;
 
 
 // Open and close Modals
-class Modal {
-    constructor(classModal) {
-        this.$popup = document.querySelector(classModal)
-    }
-
-    show() {
-        this.$popup.style.display = 'flex'
-        this.$popup.style.justifyContent = 'center'
-        document.body.style.overflow = 'hidden'
-    }
-
-    hide() {
-        this.$popup.style.display = 'none'
-        document.body.style.overflow = ''
-    }
-};
-
-class ModalWithForm extends Modal {
-    constructor(classModal, classInputs) {
-        super(classModal)
-        this.$inputs = document.querySelectorAll(classInputs)
-    }
-
-    clearInputs() {
-        this.$inputs.forEach(input => {
-            input.value = '';
-            input.classList.remove('valid', 'invalid')
-        })
-    }
-};
 
 const modalMessage = new Modal('.modal-msg');
 
@@ -139,60 +102,23 @@ modalForm.$popup.addEventListener('click', (e) => {
     }
 })
 
-// Validation
-const formFields = document.querySelectorAll('.form__input')
+// Validation form
 
-const patterns = {
-    name: /^([\s]+)?[a-zа-яА-Я]([-a-zа-яА-Я]+)((\s+[-a-zа-яА-Я]+[a-zа-яА-Я]?){1,2})?([\s]+)?$/i,
-    email: /[^.]([-\w\.#$%&'*+\/=?^`{|}~]+)@([a-z\d-]{1,61})\.([a-z]{2,8})(\.[a-z]{2})?/i,
-    message: /[a-zа-яА-Я]{2,}/i,
-}
-
-function validate(field, regex) {
-    if(regex.test(field.value)) {
-        field.classList.remove('invalid');
-        field.classList.add('valid');
-
-    } else {
-        field.classList.remove('valid');
-        field.classList.add('invalid');
-    }
-}
-
-formFields.forEach(input => {
+modalForm.$inputs.forEach(input => {
     input.addEventListener('blur', (e) => {
         validate(e.target, patterns[e.target.attributes.name.value])
     })
 })
     
-    
 // Submit form
 
-const urlForModal = 'https://d-element-databse-default-rtdb.europe-west1.firebasedatabase.app/userform.json';
+const urlForForm = 'https://d-element-databse-default-rtdb.europe-west1.firebasedatabase.app/userform.json';
 
 const formFromModal = document.querySelector('.form');
 const nameField = document.querySelector('.form__name');
 const emailField = document.querySelector('.form__email');
 const messageField = document.querySelector('.form__message');
 const textModalMessage = document.querySelector('.msg__title');
-
-
-
-const submit = async (url, form) => {
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: new FormData(form)
-    });
-
-    if(!response.ok) {
-        throw new Error(`Ошибка по адресу ${url}, статус ошибки ${response}`)
-    }
-        
-    return await response.json();
-}
     
 formFromModal.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -201,16 +127,18 @@ formFromModal.addEventListener('submit', (e) => {
         emailField.classList.contains('valid') &&
         messageField.classList.contains('valid')
     ) {
-    submit(urlForModal, formFromModal)
-        .then(() => {
-            textModalMessage.innerHTML = 'Your message successfully sent'
-            modalForm.hide()
-            modalMessage.show()
-        })
-        .catch(() => {
-            textModalMessage.innerHTML = 'Error posting form, expected later'
-            modalForm.hide()
-            modalMessage.show()
-        })
+        submit(urlForForm, formFromModal)
+            .then(() => {
+                textModalMessage.innerHTML = 'Your message successfully sent'
+                modalForm.hide()
+                modalMessage.show()
+            })
+            .catch(() => {
+                textModalMessage.innerHTML = 'Error posting form, expected later'
+                modalForm.hide()
+                modalMessage.show()
+            })
+    } else {
+        modalForm.validateInputs();
     }
 })
