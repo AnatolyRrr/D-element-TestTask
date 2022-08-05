@@ -112,6 +112,7 @@
     @extend %modal;
 
     .msg {
+        margin: auto;
         display: flex;
         justify-content: space-between;
         padding: 56px;

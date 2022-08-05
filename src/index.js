@@ -140,6 +140,7 @@ modalForm.$popup.addEventListener('click', (e) => {
 })
 
 // Validation
+const formFields = document.querySelectorAll('.form__input')
 
 const patterns = {
     name: /^([\s]+)?[a-zа-яА-Я]([-a-zа-яА-Я]+)((\s+[-a-zа-яА-Я]+[a-zа-яА-Я]?){1,2})?([\s]+)?$/i,
@@ -158,7 +159,7 @@ function validate(field, regex) {
     }
 }
 
-modalForm.$inputs.forEach(input => {
+formFields.forEach(input => {
     input.addEventListener('blur', (e) => {
         validate(e.target, patterns[e.target.attributes.name.value])
     })
@@ -166,28 +167,50 @@ modalForm.$inputs.forEach(input => {
     
     
 // Submit form
-    
-const urlForModal = 'https://jsonplaceholder.typicode.com/todos/1';
 
-const submitButton = document.querySelector('.form__button');
+const urlForModal = 'https://d-element-databse-default-rtdb.europe-west1.firebasedatabase.app/userform.json';
+
 const formFromModal = document.querySelector('.form');
 const nameField = document.querySelector('.form__name');
 const emailField = document.querySelector('.form__email');
 const messageField = document.querySelector('.form__message');
+const textModalMessage = document.querySelector('.msg__title');
+
 
 
 const submit = async (url, form) => {
-    await fetch(url, {
+    const response = await fetch(url, {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: new FormData(form)
-    })
-}
+    });
 
-submitButton.addEventListener('click', (e) => {
+    if(!response.ok) {
+        throw new Error(`Ошибка по адресу ${url}, статус ошибки ${response}`)
+    }
+        
+    return await response.json();
+}
+    
+formFromModal.addEventListener('submit', (e) => {
     e.preventDefault();
     if(
-        (nameField, emailField, messageField).classList.contains('valid')
+        nameField.classList.contains('valid') &&
+        emailField.classList.contains('valid') &&
+        messageField.classList.contains('valid')
     ) {
-        submit(urlForModal, formFromModal);
+    submit(urlForModal, formFromModal)
+        .then(() => {
+            textModalMessage.innerHTML = 'Your message successfully sent'
+            modalForm.hide()
+            modalMessage.show()
+        })
+        .catch(() => {
+            textModalMessage.innerHTML = 'Error posting form, expected later'
+            modalForm.hide()
+            modalMessage.show()
+        })
     }
 })
