@@ -1,8 +1,8 @@
 import './styles/style.scss';
-import {Modal, ModalWithForm} from './modules/modals';
-import {patterns, validate} from './modules/validate';
+import {Modal, ModalWithForm} from './modules/classes';
+import {patterns, validate} from './modules/validation';
 import {submit} from './modules/api';
-import {smoothScrollToLink} from './modules/smoothScroll';
+import {smoothScrollToLink} from './modules/scrolls';
 
 // Reset default links
 const links = document.querySelectorAll('.link');

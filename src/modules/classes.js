@@ -1,4 +1,4 @@
-import {patterns, validate} from './validate';
+import {patterns, validate} from './validation';
 
 class Modal {
     constructor(classModal) {
